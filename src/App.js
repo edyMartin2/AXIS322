@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as THREE from 'three';
 import { LevelOne } from "./Levels";
+import { Primary } from "./Objects";
 
 /**
  * Construira la logica del juego
@@ -16,7 +17,7 @@ const GameEngine = () => {
 
   // capturamos el nivel
   const L = Levels[level]
-  return (<L THREE={THREE}/>)
+  return (<L THREE={THREE} World={Primary}/>)
 
 }
 
