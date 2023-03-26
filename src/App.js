@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import * as THREE from 'three';
+import { LevelOne } from "./Levels";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+/**
+ * Construira la logica del juego
+ * consultaremos el nivel ultimo en el que se ah dejado el juego
+ */
+const GameEngine = () => {
+
+  // Definira el nivel donde se ah quedado
+  const [level, setLevel] = useState(0)
+
+  // Arreglo de niveles
+  const Levels = [LevelOne]
+
+  // capturamos el nivel
+  const L = Levels[level]
+  return (<L THREE={THREE}/>)
+
 }
 
-export default App;
+
+export default React.memo = () => {
+
+
+  return (<GameEngine />);
+}
+
