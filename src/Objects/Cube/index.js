@@ -6,9 +6,10 @@ const CubeObject = (THREE, scene, CubePhysics, world) => {
     var boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0034 });
     var word_add = world.add(pysics);
     let boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-    boxMesh.position.set(0, 0, 0)
+    // boxMesh.position.set(0, 0, 0)
     //GamePad(boxMesh)
-    scene.add(boxMesh);
+    // scene.add(boxMesh);
+
 
 
     document.addEventListener('keydown', (event) => {

@@ -1,0 +1,41 @@
+ul {
+    list-style-type: none;
+    /* quitamos las viñetas de la lista */
+    margin: 0 auto;
+    /* centramos la lista */
+    width: 80%;
+    /* ancho de la lista */
+}
+
+li {
+    margin-bottom: 20px;
+    /* margen inferior para separar cada elemento */
+    /* color de fondo oscuro */
+    color: #fff;
+    /* color de texto blanco */
+    padding: 10px;
+    /* espacio interno para separar el contenido del borde */
+    border-radius: 5px;
+    /* borde redondeado */
+}
+
+
+a:link {
+    color: black;
+    /* color del enlace cuando no se ha visitado */
+}
+
+a:visited {
+    color: black;
+    /* color del enlace cuando ya ha sido visitado */
+}
+
+a:hover {
+    color: black;
+    /* color del enlace cuando se pasa el cursor sobre él */
+}
+
+a:active {
+    color: black;
+    /* color del enlace cuando está siendo activado */
+}
