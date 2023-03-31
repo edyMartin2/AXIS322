@@ -19,7 +19,7 @@ const GameEngine = () => {
 
   // capturamos el nivel
   const L = Levels[level];
-  return <L THREE={THREE} World={Primary} changeLevel={setLevel} />;
+  return <L THREE={THREE} World={(Primary())} changeLevel={setLevel} />;
 };
 
 export default React.memo = () => {

@@ -1,5 +1,5 @@
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import edy from "./Walking.fbx";
+import edy from "./CharacterOne.fbx";
 import * as THREE from "three";
 
 class CharacterOne {
@@ -12,7 +12,8 @@ class CharacterOne {
     this.mxPlay = undefined;
     this.animation = undefined;
     this.object3d = undefined;
-    this.anim = 0;
+    this.anim = 1;
+    this.pysics = undefined
   }
 
   load() {
@@ -30,18 +31,16 @@ class CharacterOne {
         ctx.animation = ctx.object3d.animations[ctx.anim];
 
         ctx.mxPlay = ctx.mixer.clipAction(ctx.animation);
-        ctx.mxPlay.repetitions = false
         ctx.mxPlay.play();
         console.log(ctx.mxPlay)
 
         //this.scene.add(object3d);
-        ctx.controls();
       },
       function (load) {
-        console.log("OnLoadObject", load);
+        
       },
       function (e) {
-        console.log("OnErrorLoad", e);
+        
       }
     );
   }
@@ -50,25 +49,12 @@ class CharacterOne {
     return this.mixer;
   }
 
-  controls() {
-    document.addEventListener("keydown", (event) => {
-      var action = event.key;
-      switch (action) {
-        case " ":
-          this.mxPlay.stop();
-          break;
-        case "p":
-          this.mxPlay.play()
-          console.log("Hola");
-          break;
-        default:
-          break;
-      }
-    });
-  }
-
   Object() {
     return this.object3d;
+  }
+
+  mPlay(){
+    return this.mxPlay
   }
 }
 
