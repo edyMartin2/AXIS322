@@ -7,6 +7,7 @@ import CharacterOnePysics from "../Pysichs/CharacterOnePysics";
 import TerrainPhysics from "../Pysichs/TerrainPhysics";
 
 import Load from "../Helpers/Load";
+import JoistycCharacterOne from "../Joistycs/CharacterOne";
 
 
 const LevelOne = ({ THREE, World }) => {
@@ -90,15 +91,14 @@ const LevelOne = ({ THREE, World }) => {
   const ResourceLoad = () => {
     AddOnWord()
     var statused = false
-
+    console.log('ready charge resource')
     if (
       CharacterOnePysic !== undefined &&
       Terrains !== undefined &&
       scene
     ) {
       AddScene()
-      let position = CharacterOnePysic.getPosition()
-      let quaternion = CharacterOnePysic.getQuaternion()
+      JoistycCharacterOne(CharacterOnePysic)
       statused = true
     }
 

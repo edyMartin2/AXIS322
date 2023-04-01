@@ -23,7 +23,7 @@ class CharacterOne {
       function (object3d) {
         ctx.object3d = object3d;
         ctx.object3d.scale.multiplyScalar(0.009);
-        ctx.object3d.position.set(1, 2, 0);
+        ctx.object3d.position.set(0, 0, 0);
 
         console.log("Hola mundo",object3d);
 
