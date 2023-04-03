@@ -7,7 +7,7 @@ import CharacterOnePysics from "../Pysichs/CharacterOnePysics";
 import TerrainPhysics from "../Pysichs/TerrainPhysics";
 
 import Load from "../Helpers/Load";
-import JoistycCharacterOne from "../Joistycs/CharacterOne";
+//import JoistycCharacterOne from "../Joistycs/CharacterOne";
 
 const LevelOne = ({ THREE, World }) => {
   const [status, setStatus] = useState(false);
@@ -96,7 +96,7 @@ const LevelOne = ({ THREE, World }) => {
       Terrains !== undefined &&
       scene
     ) {
-      JoistycCharacterOne(CharacterOnePysic);
+      //JoistycCharacterOne(CharacterOnePysic);
       statused = true;
     }
 

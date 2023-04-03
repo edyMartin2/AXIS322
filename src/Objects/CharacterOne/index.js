@@ -7,33 +7,15 @@ class CharacterOne {
   scene;
 
   constructor(scene) {
-    console.log("LLamamos a character one", Date.now());
     this.scene = scene;
     this.loader = new FBXLoader();
-    this.current = "Walk";
-    /*
-    this.mixer = undefined;
-    this.mxPlay = undefined;
-    this.animation = undefined;
-    this.object3d = undefined;
-    this.anim = 1;
-    this.pysics = undefined;
-
-    this.animStop = undefined;
-    //cargamos las animaciones completas
-    this.walker();
-    document.addEventListener("keydown", () => {
-      if (this.animStop !== undefined) {
-        this.animate(this.animStop);
-      }
-    });
-    */
-
-    //this is for loader
+    this.current = "Crying";
     this.Animations = undefined;
-    this.Loader(Walker, "Walk");
+
     this.Loader(Crying, "Crying");
+    this.Loader(Walker, "Walk");
     this.Play();
+    this.Controls()
   }
 
   /**
@@ -102,63 +84,23 @@ class CharacterOne {
     }
   }
 
-  // load() {
-  //   let ctx = this;
-  //   this.loader.load(
-  //     stopping,
-  //     function (object3d) {
-  //       ctx.object3d = object3d;
-  //       ctx.object3d.scale.multiplyScalar(0.009);
-  //       ctx.object3d.position.set(0, 0, 0);
+  GetAnimations() {
+    return this.Animations
+  }
 
-  //       console.log("Hola mundo objecto 3d -->", object3d);
-
-  //       ctx.mixer = new THREE.AnimationMixer(ctx.object3d);
-  //       ctx.animation = ctx.object3d.animations[ctx.anim];
-
-  //       ctx.mxPlay = ctx.mixer.clipAction(ctx.animation);
-  //       ctx.mxPlay.play();
-  //       console.log(ctx.mxPlay);
-
-  //       //this.scene.add(object3d);
-  //     },
-  //     function (load) {},
-  //     function (e) {}
-  //   );
-  // }
-
-  // walker() {
-  //   let ctx = this;
-  //   this.loader.load(
-  //     walker,
-  //     function (object3d) {
-  //       ctx.animStop = object3d;
-  //       ctx.animStop.scale.multiplyScalar(0.009);
-  //     },
-  //     function (load) {},
-  //     function (e) {}
-  //   );
-  // }
-
-  // animate(animation3D) {
-  //   this.mixer = new THREE.AnimationMixer(animation3D);
-  //   this.animation = animation3D.animations[1];
-
-  //   this.mxPlay = this.mixer.clipAction(this.animation);
-  //   this.mxPlay.play();
-  // }
-
-  // getMixer() {
-  //   return this.mixer;
-  // }
-
-  // Object() {
-  //   return this.object3d;
-  // }
-
-  // mPlay() {
-  //   return this.mxPlay;
-  // }
+  Controls() {
+    document.addEventListener('keydown', (event) => {
+      const action = event.code
+      console.log(action)
+      switch (action) {
+        case 'ArrowRight':
+          console.log(this.Animations)
+          this.scene.remove(this.Animations[this.current].Object3D)
+          //this.current = 'Walk'
+          break
+      }
+    })
+  }
 }
 
 export default CharacterOne;
