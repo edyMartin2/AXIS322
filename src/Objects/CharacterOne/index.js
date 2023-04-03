@@ -1,105 +1,78 @@
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import Walker from "./CharacterOne.fbx";
 import Crying from "./Crying.fbx";
+
+import Walk from "../../Actors/Scarlett/Standing.fbx"
+import scarlettStanding from "../../Actors/Scarlett/Standing.fbx";
 import * as THREE from "three";
 
 class CharacterOne {
   scene;
 
   constructor(scene) {
-    this.scene = scene;
-    this.loader = new FBXLoader();
-    this.current = "Crying";
-    this.Animations = undefined;
+    this.Scene = scene;
+    this.FBXLoader = new FBXLoader();
+    this.CurrentAnimation = "Standing";
+    this.Mixer = undefined;
+    this.Pincels = [];
 
-    this.Loader(Crying, "Crying");
-    this.Loader(Walker, "Walk");
-    this.Play();
-    this.Controls()
+    this.Loader(scarlettStanding, 'Standing');
+    this.Loader(Crying, 'Crying')
+	this.Loader(Walk, 'Walk')
+    this.Actor3D = undefined;
   }
 
-  /**
-   * { Actor } 3DObject [FBX]
-   */
-  Loader(Object3D, Name) {
-    let _this = this;
-    let Actor3D = undefined;
-
-    this.loader.load(
-      Object3D,
-
-      (Actor) => {
-        // console.log("le daremos este nombre ", x)
-        Actor3D = Actor;
-        Actor3D.scale.multiplyScalar(0.009);
-        Actor3D.position.set(0, 0, 0);
-
-        _this.Animations = {
-          ..._this.Animations,
-          [`${Name}`]: {
-            Mixer: new THREE.AnimationMixer(Actor3D),
-            Animations: Actor3D.animations,
-            Object3D: Actor3D,
-          },
-        };
-      }
-    );
-
-    return Actor3D;
-  }
-
-  Play() {
-    let Checker = setInterval(() => {
-      if (this.Animations !== undefined) {
-        let x = this.scene.add(this.Animations[this.current].Object3D);
-        if (x) {
-          clearInterval(Checker);
-          this.Animation();
-        }
-      } else {
-        console.log("aun no se carga esperando");
+  Init() {
+    const Init = setInterval(() => {
+      if (this.Pincels.length !== 0) {
+        let InitAnimation = this.Pincels[this.CurrentAnimation];
+        InitAnimation.play();
+        this.Controls();
+        clearInterval(Init);
       }
     }, 100);
   }
 
-  GetMixer() {
-    if (this.Animations !== undefined) {
-      return this.Animations[this.current].Mixer;
-    }
-  }
+  /**
+   * { Actor } 3DObject [FBX]
+   * { Name } Nombre de la animacion
+   */
+  Loader(Object3D, Name) {
+    let _this = this;
+    this.FBXLoader.load(Object3D, (Actor3D) => {
+      Actor3D.position.set(0, 0, 0);
+      Actor3D.scale.multiplyScalar(0.009);
+      //agregamos el primer muñequito xd
+      if (_this.Actor3D === undefined) {
+        _this.Actor3D = Actor3D;
+        console.log("se añade el primero", Date.now());
+        _this.Mixer = new THREE.AnimationMixer(_this.Actor3D);
+      }
+      let animations = Actor3D.animations;
 
-  GetObject() {
-    if (this.Animations !== undefined) {
-      return this.Animations[this.current].Object3D;
-    }
-  }
-
-  Animation() {
-    if (this.Animations !== undefined) {
-      let currentPerson = this.Animations[this.current];
-      let currentMixer = currentPerson.Mixer;
-      let animation = currentPerson.Animations[1];
-      let clipAnimation = currentMixer.clipAction(animation);
-      clipAnimation.play();
-    }
-  }
-
-  GetAnimations() {
-    return this.Animations
+      _this.Pincels = {
+        ...this.Pincels,
+        [`${Name}`]: _this.Mixer.clipAction(animations[1]),
+      };
+    });
   }
 
   Controls() {
-    document.addEventListener('keydown', (event) => {
-      const action = event.code
-      console.log(action)
-      switch (action) {
-        case 'ArrowRight':
-          console.log(this.Animations)
-          this.scene.remove(this.Animations[this.current].Object3D)
-          //this.current = 'Walk'
-          break
-      }
-    })
+    document.addEventListener("keydown", (e) => {
+      console.log(this.Pincels);
+        // let InitAnimation = this.Pincels[this.CurrentAnimation];
+        // InitAnimation.stop();
+
+        // let next = this.Pincels['Crying'];
+        // next.play();
+    });
+  }
+
+  GetObject() {
+    return this.Actor3D;
+  }
+
+  GetMixer() {
+    return this.Mixer;
   }
 }
 

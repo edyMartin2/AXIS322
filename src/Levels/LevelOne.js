@@ -79,7 +79,9 @@ const LevelOne = ({ THREE, World }) => {
   };
 
   const AddScene = () => {
-    setCharacterOnes(new CharacterOne(scene));
+    const Scarlet = new CharacterOne(scene);
+    Scarlet.Init()
+    setCharacterOnes(Scarlet);
   };
 
   // this is a resource load
